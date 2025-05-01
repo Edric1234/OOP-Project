@@ -99,10 +99,12 @@ public class ProductManager {
 
     /**
      * Imports the products from a csv file
-     * @param filePath path from content root of the file
+     * @param filePath path of the file from content root
+     * @return the arraylist of  all products that contain all their information
      */
     public static ArrayList<Product> saveProducts(String filePath) {
         //TODO (TextIO I)
+        return null;
     }
 
     public static List<Product> getProducts() {
