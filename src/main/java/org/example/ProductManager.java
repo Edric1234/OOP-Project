@@ -101,7 +101,7 @@ public class ProductManager {
      * Imports the products from a csv file
      * @param filePath path from content root of the file
      */
-    public static void saveProducts(String filePath) {
+    public static ArrayList<Product> saveProducts(String filePath) {
         //TODO (TextIO I)
     }
 
