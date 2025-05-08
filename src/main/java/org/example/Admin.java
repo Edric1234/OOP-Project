@@ -18,8 +18,8 @@ public class Admin extends User {
      * @return true if the book was successfully added, otherwise false
      */
     public boolean addBook(String productId, String name, double price, String description, String author, String isbn) {
-        if (productId == null || name == null || name.isBlank() || price < 0 || description == null || author == null ||
-                author.isBlank() || isbn == null || isbn.isBlank()) {
+        if (!Product.isProductValid(productId, name, price, description) || author == null || author.isBlank()
+                || isbn == null || isbn.isBlank()) {
             return false;
         }
         return ProductManager.addBookHelper(productId, name, price, description, author, isbn);
@@ -36,8 +36,7 @@ public class Admin extends User {
      * @return true if the clothing was successfully added, otherwise false
      */
     public boolean addClothing(String productId, String name, double price, String description, Clothing.ClothingSize size, String color) {
-        if (productId == null || name == null || name.isBlank() || price < 0 || description == null || size == null ||
-                color == null || color.isBlank()) {
+        if (!Product.isProductValid(productId, name, price, description) || size == null || color == null || color.isBlank()) {
             return false;
         }
         return ProductManager.addClothingHelper(productId, name, price, description, size, color);
@@ -54,8 +53,7 @@ public class Admin extends User {
      * @return true if the electronic was successfully added, otherwise false
      */
     public boolean addElectronic(String productId, String name, double price, String description, int warrantyMonths, String brand) {
-        if (productId == null || name == null || name.isBlank() || price < 0 || description == null ||
-                warrantyMonths < 0 || brand == null || brand.isBlank()) {
+        if (!Product.isProductValid(productId, name, price, description) || warrantyMonths < 0 || brand == null || brand.isBlank()) {
             return false;
         }
         return ProductManager.addElectronicHelper(productId, name, price, description, warrantyMonths, brand);

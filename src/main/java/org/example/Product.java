@@ -23,6 +23,18 @@ public abstract class Product implements Comparable<Product> {
     public abstract void displayDetails();
 
     /**
+     * Checks if the product basic details are valid
+     * @param productId product id
+     * @param name product name
+     * @param price product price
+     * @param description product description
+     * @return true if the product is valid, otherwise false
+     */
+    public static boolean isProductValid(String productId, String name, double price, String description) {
+        return (productId != null && name != null && !name.isBlank() && price >= 0 && description != null);
+    }
+
+    /**
      * Displays the basic details of a product
      */
     public void displayBasicDetails() {
