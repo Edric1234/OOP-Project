@@ -1,10 +1,29 @@
 package org.example;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ProductManager {
     public static List<Product> products = new ArrayList<>();
+
+    /**
+     * Checks if a product with the given productId already exist
+     * @param productId product id
+     * @return true if the product already exists, otherwise false
+     */
+    public static boolean doesProductExist(String productId) {
+        for (Product product : products) {
+            if (product.getProductId().equals(productId)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Helper method for the addBook method in the admin class
@@ -17,7 +36,11 @@ public class ProductManager {
      * @return true if the book was successfully added, otherwise false
      */
     public static boolean addBookHelper(String productId, String name, double price, String description, String author, String isbn) {
-        //TODO (Updates the loadProduct method also)
+        if (doesProductExist(productId)) {
+            return false;
+        }
+        products.add(new Book(productId, name, Product.ProductCategory.BOOK, price, description, new ArrayList<>(), author, isbn));
+        loadProducts();
         return true;
     }
 
@@ -32,7 +55,11 @@ public class ProductManager {
      * @return true if the clothing was successfully added, otherwise false
      */
     public static boolean addClothingHelper(String productId, String name, double price, String description, Clothing.ClothingSize size, String color) {
-        //TODO (Updates the loadProduct method also)
+        if (doesProductExist(productId)) {
+            return false;
+        }
+        products.add(new Clothing(productId, name, Product.ProductCategory.CLOTHING, price, description, new ArrayList<>(), size, color));
+        loadProducts();
         return true;
     }
 
@@ -47,7 +74,11 @@ public class ProductManager {
      * @return true if the electronic was successfully added, otherwise false
      */
     public static boolean addElectronicHelper(String productId, String name, double price, String description, int warrantyMonths, String brand) {
-        //TODO (Updates the loadProduct method also)
+        if (doesProductExist(productId)) {
+            return false;
+        }
+        products.add(new Electronic(productId, name, Product.ProductCategory.ELECTRONIC, price, description, new ArrayList<>(), warrantyMonths, brand));
+        loadProducts();
         return true;
     }
 
@@ -75,8 +106,13 @@ public class ProductManager {
      * @return the list of products in alphabetical order by name that corresponds to the input category
      */
     public static List<Product> getProductsByCategoryHelper(Product.ProductCategory category) {
-        //TODO (Display category on top, product name, product id and average rating)
-        return null;
+        List<Product> result = new ArrayList<>();
+        for (Product product : products) {
+            if (product.getCategory().equals(category)) {
+                result.add(product);
+            }
+        }
+        return result;
     }
 
     /**
@@ -85,7 +121,14 @@ public class ProductManager {
      * @return the product
      */
     public static Product getProductHelper(String productId) {
-        //TODO (Connect the method with displayDetails())
+        if (!doesProductExist(productId)) {
+            return null;
+        }
+        for (Product product : products) {
+            if (product.getProductId().equals(productId)) {
+                return product;
+            }
+        }
         return null;
     }
 
@@ -94,7 +137,34 @@ public class ProductManager {
      */
     public static void loadProducts() {
         String filePath = "src/main/resources/products.csv";
-        //TODO (TextIO O)
+        File file = new File(filePath);
+
+        try (FileWriter fw = new FileWriter(file)) {
+            for (Product product : products) {
+                fw.write(product.getProductId() + ",");
+                fw.write(product.getName() + ",");
+                fw.write(product.getCategory() + ",");
+                fw.write(product.getPrice() + ",");
+                fw.write(product.getDescription() + ",");
+
+                for (Review review : product.getReviews()) {
+                    fw.write(review.getRating() + ",");
+                }
+
+                if (product instanceof Book book) {
+                    fw.write(book.getAuthor() + ",");
+                    fw.write(book.getIsbn() + "\n");
+                } else if (product instanceof Clothing clothing) {
+                    fw.write(clothing.getSize() + ",");
+                    fw.write(clothing.getColor() + "\n");
+                } else if (product instanceof Electronic electronic) {
+                    fw.write(electronic.getWarrantyMonths() + ",");
+                    fw.write(electronic.getBrand() + "\n");
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -103,8 +173,23 @@ public class ProductManager {
      * @return the arraylist of  all products that contain all their information
      */
     public static ArrayList<Product> saveProducts(String filePath) {
-        //TODO (TextIO I)
-        return null;
+        ArrayList<Product> result = new ArrayList<>();
+        File file = new File(filePath);
+
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split(",");
+                String productId = parts[0];
+                String name = parts[1];
+                String category = parts[2];
+                double price = Double.parseDouble(parts[3]);
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
     }
 
     public static List<Product> getProducts() {
