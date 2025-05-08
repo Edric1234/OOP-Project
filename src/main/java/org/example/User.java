@@ -59,8 +59,7 @@ public abstract class User {
      * @return the list of all products
      */
     public List<Product> getProducts() {
-        //TODO (Add all the products into a list)
-        return null;
+        return ProductManager.getProducts();
     }
 
     /**
