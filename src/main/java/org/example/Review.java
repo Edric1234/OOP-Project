@@ -127,10 +127,17 @@ public class Review {
 
         @Override
         public int compare(Review r1, Review r2) {
-            //TODO (Compares the rating by
-            // 1- newest to oldest
-            // 2- highest rating to lowest rating
-            return 0;
+            return switch (type.toLowerCase()) {
+                case "date" -> (r1.getDate().equals(r2.getDate()))
+                        ? r1.getRating().value - r2.getRating().value
+                        : r2.getDate().compareTo(r1.getDate());
+                case "rating" -> (r1.getRating().value == r2.getRating().value)
+                        ? r1.getText().length() - r2.getText().length()
+                        : r2.getRating().value - r1.getRating().value;
+                default -> (r1.getText().length() == r2.getText().length())
+                        ? r1.getDate().compareTo(r2.getDate())
+                        : r2.getText().length() - r1.getText().length();
+            };
         }
     }
 }
