@@ -27,8 +27,8 @@ public class ReviewManager {
                     }
                 }
                 Review result = new Review(reviewId, productId, userId, rating, text);
-                reviews.add(result);
                 product.getReviews().add(result);
+                reviews.add(result);
                 System.out.println("Review submitted");
                 return true;
             }
@@ -44,8 +44,18 @@ public class ReviewManager {
      * @return true if the review has been successfully deleted, otherwise false
      */
     public static boolean deleteReviewHelper(int reviewId) {
-        //TODO (Deletes the review of the product and removes it from the list of reviews in the review class)
-        return true;
+        for (Product product : products) {
+            for (Review review : product.getReviews()) {
+                if (review.getReviewId() == reviewId) {
+                    product.getReviews().remove(review);
+                    reviews.remove(review);
+                    System.out.println("Review removed");
+                    return true;
+                }
+            }
+        }
+        System.out.println("Couldn't review with id: " + reviewId);
+        return false;
     }
 
     /**
@@ -54,9 +64,14 @@ public class ReviewManager {
      * @param productId input product id
      * @return the list of reviews of the given product id
      */
-    public static List<Review> getProductReviewsHelper(int productId) {
-        //TODO (Adds all the review of a product into a list)
-        return null;
+    public static List<Review> getProductReviewsHelper(String productId) {
+        List<Review> result = new ArrayList<>();
+        for (Product product : products) {
+            if (product.getProductId().equals(productId)) {
+                result.addAll(product.getReviews());
+            }
+        }
+        return result;
     }
 
     public List<Review> getReviews() {

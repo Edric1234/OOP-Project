@@ -94,7 +94,7 @@ public class UserTest {
         expected.add(review1);
         expected.add(review2);
         User user = new Customer("test", "pass");
-        List<Review> result = user.getProductReviews(1); // Assuming productId is int
+        List<Review> result = user.getProductReviews("1"); // Assuming productId is int
 
         Assertions.assertEquals(expected, result);
     }

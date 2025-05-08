@@ -68,7 +68,7 @@ public abstract class User {
      * @param productId input product id
      * @return the list of reviews of the given product id
      */
-    public List<Review> getProductReviews(int productId) {
+    public List<Review> getProductReviews(String productId) {
         return ReviewManager.getProductReviewsHelper(productId);
     }
 
