@@ -2,6 +2,7 @@ import org.example.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -53,12 +54,10 @@ public class UserTest {
     public void testGetProduct() {
         Product testProduct = new Electronic("E1", "Laptop", Product.ProductCategory.ELECTRONIC,
                 999, "High-end laptop", new ArrayList<>(), 12, "Dell");
-        Book book = new Book("B1", "Clean Code", Product.ProductCategory.BOOK, 20,
-                "Programming book", new ArrayList<>(), "", "978-0132350884");
         ProductManager.products.add(testProduct);
 
         User user = new Customer("test", "pass");
-        Product result = user.getProduct("P123");
+        Product result = user.getProduct("E1");
 
         Assertions.assertEquals(testProduct, result);
     }
@@ -68,7 +67,7 @@ public class UserTest {
         Electronic electronic = new Electronic("1", "Laptop", Product.ProductCategory.ELECTRONIC,
                 999, "High-end laptop", new ArrayList<>(), 12, "Dell");
         Book book = new Book("B1", "Clean Code", Product.ProductCategory.BOOK, 20,
-                "Programming book", new ArrayList<>(), "", "978-0132350884");
+                "Programming book", new ArrayList<>(), "...", "978-0132350884");
         ProductManager.products.add(electronic);
         ProductManager.products.add(book);
         User user = new Customer("test", "pass");
@@ -85,16 +84,17 @@ public class UserTest {
     public void testGetProductReviews() {
         Electronic electronic = new Electronic("P1", "Laptop", Product.ProductCategory.ELECTRONIC,
                 999, "High-end laptop", new ArrayList<>(), 12, "Dell");
-        Review review1 = new Review(1, "P1", 1, Review.StarRating.FIVE, "Great!");
-        Review review2 = new Review(2, "P1", 2, Review.StarRating.FOUR, "Good");
+        Review review1 = new Review(1, "P1", 1, Review.StarRating.FIVE, "Great!", LocalDate.now());
+        Review review2 = new Review(2, "P1", 2, Review.StarRating.FOUR, "Good", LocalDate.now());
         electronic.getReviews().add(review1);
         electronic.getReviews().add(review2);
+        ProductManager.products.add(electronic);
 
         List<Review> expected = new ArrayList<>();
         expected.add(review1);
         expected.add(review2);
         User user = new Customer("test", "pass");
-        List<Review> result = user.getProductReviews("1"); // Assuming productId is int
+        List<Review> result = user.getProductReviews("P1");
 
         Assertions.assertEquals(expected, result);
     }

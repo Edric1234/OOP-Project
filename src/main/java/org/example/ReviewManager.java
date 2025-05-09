@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +11,11 @@ public class ReviewManager {
     /**
      * Submits the review of the user based on a given product id
      * Helper method of the submitReview method in the customer class
-     * @param reviewId review id
+     * @param reviewId  review id
      * @param productId product id
-     * @param userId user id
-     * @param rating rating of product from the customer
-     * @param text text of the review
+     * @param userId    user id
+     * @param rating    rating of product from the customer
+     * @param text      text of the review
      * @return true if the review has been successfully submitted, otherwise false
      */
     public static boolean submitReviewHelper(int reviewId, String productId, int userId, Review.StarRating rating, String text) {
@@ -26,7 +27,7 @@ public class ReviewManager {
                         return false;
                     }
                 }
-                Review result = new Review(reviewId, productId, userId, rating, text);
+                Review result = new Review(reviewId, productId, userId, rating, text, LocalDate.now());
                 product.getReviews().add(result);
                 reviews.add(result);
                 System.out.println("Review submitted");

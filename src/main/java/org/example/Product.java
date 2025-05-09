@@ -24,9 +24,9 @@ public abstract class Product implements Comparable<Product> {
 
     /**
      * Checks if the product basic details are valid
-     * @param productId product id
-     * @param name product name
-     * @param price product price
+     * @param productId   product id
+     * @param name        product name
+     * @param price       product price
      * @param description product description
      * @return true if the product is valid, otherwise false
      */

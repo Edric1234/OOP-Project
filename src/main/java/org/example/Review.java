@@ -14,13 +14,13 @@ public class Review {
 
     private static int nextReviewId = 1;
 
-    public Review(int reviewId, String productId, int userId, StarRating rating, String text) {
+    public Review(int reviewId, String productId, int userId, StarRating rating, String text, LocalDate date) {
         this.reviewId = nextReviewId++;
         this.productId = productId;
         this.userId = userId;
         this.rating = rating;
         this.text = text;
-        this.date = LocalDate.now();
+        this.date = date;
     }
 
     @Override
