@@ -22,7 +22,7 @@ public class ReviewManager {
             if (product.getProductId().equals(productId)) {
                 for (Review review : product.getReviews()) {
                     if (review.getUserId() == userId) {
-                        System.out.println("User already reviewed this product");
+                        System.out.println("Customer already reviewed this product");
                         return false;
                     }
                 }
