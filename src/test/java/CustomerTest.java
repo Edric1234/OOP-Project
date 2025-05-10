@@ -14,7 +14,7 @@ public class CustomerTest {
                 "Apple");
         ProductManager.products.add(electronic);
 
-        boolean result = customer.submitReview(1, "123-123-123", 1, Review.StarRating.ONE, "");
+        boolean result = customer.submitReview("123-123-123", 1, Review.StarRating.ONE, "");
         boolean expected = true;
 
         Assertions.assertEquals(expected, result);

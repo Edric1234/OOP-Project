@@ -84,8 +84,8 @@ public class UserTest {
     public void testGetProductReviews() {
         Electronic electronic = new Electronic("P1", "Laptop", Product.ProductCategory.ELECTRONIC,
                 999, "High-end laptop", new ArrayList<>(), 12, "Dell");
-        Review review1 = new Review(1, "P1", 1, Review.StarRating.FIVE, "Great!", LocalDate.now());
-        Review review2 = new Review(2, "P1", 2, Review.StarRating.FOUR, "Good", LocalDate.now());
+        Review review1 = new Review("P1", 1, Review.StarRating.FIVE, "Great!", LocalDate.now());
+        Review review2 = new Review("P1", 2, Review.StarRating.FOUR, "Good", LocalDate.now());
         electronic.getReviews().add(review1);
         electronic.getReviews().add(review2);
         ProductManager.products.add(electronic);

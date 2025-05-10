@@ -59,7 +59,7 @@ public class AdminTest {
         ProductManager.products.add(new Electronic("123-123-123", "IPhone",
                 Product.ProductCategory.ELECTRONIC, 20, "", new ArrayList<>(), 6,
                 "Apple"));
-        Review r1 = new Review(1, "123-123-123", 1, Review.StarRating.ONE, "...", LocalDate.now());
+        Review r1 = new Review("123-123-123", 1, Review.StarRating.ONE, "...", LocalDate.now());
         ProductManager.products.get(0).getReviews().add(r1);
         ReviewManager.reviews.add(r1);
 

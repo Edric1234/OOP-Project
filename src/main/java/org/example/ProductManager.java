@@ -203,13 +203,12 @@ public class ProductManager {
                 int i = 5;
                 if (parts.length != 8) { //If the list of reviews isn't empty
                     while (i < parts.length - 2) {
-                        int reviewId = Integer.parseInt(parts[i++]);
                         String productIdReview = parts[i++];
                         int userId = Integer.parseInt(parts[i++]);
                         Review.StarRating rating = Review.StarRating.valueOf(parts[i++]);
                         String text = parts[i++];
                         LocalDate date = LocalDate.parse(parts[i++]);
-                        reviews.add(new Review(reviewId, productIdReview, userId, rating, text, date));
+                        reviews.add(new Review(productIdReview, userId, rating, text, date));
                     }
                 }
                 if (category.equals(Product.ProductCategory.BOOK)) {
