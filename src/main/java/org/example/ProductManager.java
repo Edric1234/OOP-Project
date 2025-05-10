@@ -42,6 +42,7 @@ public class ProductManager {
         }
         products.add(new Book(productId, name, Product.ProductCategory.BOOK, price, description, new ArrayList<>(), author, isbn));
         saveProducts();
+        System.out.println("Product has been successfully added");
         return true;
     }
 
@@ -61,6 +62,7 @@ public class ProductManager {
         }
         products.add(new Clothing(productId, name, Product.ProductCategory.CLOTHING, price, description, new ArrayList<>(), size, color));
         saveProducts();
+        System.out.println("Product has been successfully added");
         return true;
     }
 
@@ -80,6 +82,7 @@ public class ProductManager {
         }
         products.add(new Electronic(productId, name, Product.ProductCategory.ELECTRONIC, price, description, new ArrayList<>(), warrantyMonths, brand));
         saveProducts();
+        System.out.println("Product has been successfully added");
         return true;
     }
 
@@ -198,7 +201,7 @@ public class ProductManager {
                 String description = parts[4];
                 List<Review> reviews = new ArrayList<>();
                 int i = 5;
-                if (parts.length != 8) {
+                if (parts.length != 8) { //If the list of reviews isn't empty
                     while (i < parts.length - 2) {
                         int reviewId = Integer.parseInt(parts[i++]);
                         String productIdReview = parts[i++];
