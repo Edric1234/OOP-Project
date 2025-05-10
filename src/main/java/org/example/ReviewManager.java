@@ -55,7 +55,7 @@ public class ReviewManager {
                 }
             }
         }
-        System.out.println("Couldn't review with id: " + reviewId);
+        System.out.println("Couldn't find review with id: " + reviewId);
         return false;
     }
 

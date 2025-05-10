@@ -14,7 +14,7 @@ public class Review {
 
     private static int nextReviewId = 1;
 
-    public Review(int reviewId, String productId, int userId, StarRating rating, String text, LocalDate date) {
+    public Review(String productId, int userId, StarRating rating, String text, LocalDate date) {
         this.reviewId = nextReviewId++;
         this.productId = productId;
         this.userId = userId;
